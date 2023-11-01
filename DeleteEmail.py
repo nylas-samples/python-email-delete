@@ -1,27 +1,23 @@
+# Import dependencies
+from nylas import Client
 from dotenv import load_dotenv
+import os
+from nylas.models.messages import ListMessagesQueryParams
+
+# Load our .env file
 load_dotenv()
 
-from nylas import APIClient
-import os
-import sys
-
-nylas = APIClient(
-    os.environ.get('CLIENT_ID'),
-    os.environ.get('CLIENT_SECRET'),
-    os.environ.get('ACCESS_TOKEN')
+# Initialize Nylas client
+nylas = Client(
+    api_key = os.environ.get("V3_API_KEY")
 )
 
-messageId = "<MESSAGE_ID>"
+message_id = "<YOUR_MESSAGE_ID>"
 
-labelsDict = {}
-labels = nylas.labels.all()
-for label in labels:
-    labelsDict[label["name"]] = label["id"] 
+# Read emails
+request_id = nylas.messages.destroy(os.environ.get("GRANT_ID"), message_id, {})
 
-try:
-    message = nylas.messages.get(messageId)
-    message.add_label(labelsDict["trash"])
-    message.save()
-    print(f"Your message was succesfully deleted")
-except:
-    print(f"An {sys.exc_info()[0]} error ocurred. \nMessage was not found.")
+if request_id != None:
+	print("Email deleted succesfully")
+else:
+	print("The email couldn't be deleted")
