@@ -2,6 +2,8 @@
 
 This sample will show you to easily delete an email with the Nylas Python SDK.
 
+You can follow along step-by-step in our blog post ["How to Read Emails with the Nylas Python SDK"](https://www.nylas.com/blog/how-to-read-email-inbox-data-with-nylas-python-sdk/).
+
 ## Setup
 
 ### System dependencies
@@ -41,7 +43,7 @@ $ python3 DeleteEmail.py
 When your message is successfully deleted, you'll get the following output in your terminal:
 
 ```text
-Your message was succesfully deleted
+Email deleted succesfully
 ```
 
 ## Learn more
